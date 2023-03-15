@@ -27,7 +27,7 @@ func MainHandler(w http.ResponseWriter, httpreq *http.Request) {
 	}
 
 	if httpreq.Method == "POST" {
-		if url == "/api/v1/github/event" {
+		if url == "/api/v1/github/wh" {
 			handleGithubWh(httpreq, &w)
 		}
 	}
