@@ -7,7 +7,7 @@ import (
 	"github.com/google/go-github/v50/github"
 )
 
-func getPayload(req *http.Request, resp *http.ResponseWriter) {
+func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	payload, err := github.ValidatePayload(req, []byte(""))
 	if err != nil {
 		fmt.Printf("error :%v", err)
