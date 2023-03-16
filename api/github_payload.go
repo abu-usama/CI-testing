@@ -57,4 +57,5 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// 	}
 	// 	jsonCS, _ := json.Marshal(checkSuiteList)
 	// 	c.L.Infof("Check suite created: %v", string(jsonCS))
+
 }
