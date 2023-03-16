@@ -49,4 +49,12 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// default:
 	// 	c.L.Infof("unknown event : %V", event)
 	// }
+
+	// listCheckSuiteReq := github.ListCheckSuiteOptions{}
+	// 	checkSuiteList, _, err := client.Checks.ListCheckSuitesForRef(ctx, owner, repo, ref, &listCheckSuiteReq)
+	// 	if err != nil {
+	// 		c.L.Errorf("Error listing check suite: %v\n", err)
+	// 	}
+	// 	jsonCS, _ := json.Marshal(checkSuiteList)
+	// 	c.L.Infof("Check suite created: %v", string(jsonCS))
 }
