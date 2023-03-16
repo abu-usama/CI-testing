@@ -36,4 +36,16 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// 	HeadSHA: "headSHA",
 	// 	Status:  github.String("completed"),
 	// }
+
+	// event, err := github.ParseWebHook(github.WebHookType(req.Request), payload)
+	// if err != nil {
+	// 	c.L.Errorf("error :%v", err)
+	// }
+	// switch event := event.(type) {
+	// case *github.PushEvent:
+	// 	c.L.Infof("action: %v", event.GetAction())
+	// 	c.L.Infof("head-commit : %v", event.GetHeadCommit().ID)
+	// default:
+	// 	c.L.Infof("unknown event : %V", event)
+	// }
 }
