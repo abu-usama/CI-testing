@@ -37,6 +37,18 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// 	Status:  github.String("completed"),
 	// }
 
+	// checkRunRequest := github.CreateCheckRunOptions{
+	// 	Name:    "lint",
+	// 	HeadSHA: headSHA,
+	// 	Status:  github.String("in_progress"),
+	// }
+	// checkRun, _, err := client.Checks.CreateCheckRun(ctx, owner, repo, checkRunRequest)
+	// if err != nil {
+	// 	c.L.Errorf("Error creating check run: %v", err)
+	// }
+	// jsonCR, _ := json.Marshal(checkRun)
+	// c.L.Infof("Check run created: %v", string(jsonCR))
+
 	// event, err := github.ParseWebHook(github.WebHookType(req.Request), payload)
 	// if err != nil {
 	// 	c.L.Errorf("error :%v", err)
