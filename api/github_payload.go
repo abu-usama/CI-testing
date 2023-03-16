@@ -55,7 +55,7 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// 	if err != nil {
 	// 		c.L.Errorf("Error listing check suite: %v\n", err)
 	// 	}
-	// 	jsonCS, _ := json.Marshal(checkSuiteList)
-	// 	c.L.Infof("Check suite created: %v", string(jsonCS))
+	// 	jsonCSL, _ := json.Marshal(checkSuiteList)
+	// 	c.L.Infof("Check suite created: %v", string(jsonCSL))
 
 }
