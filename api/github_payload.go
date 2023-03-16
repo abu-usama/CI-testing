@@ -14,14 +14,26 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	}
 	fmt.Printf("payload :%v", string(payload))
 
-	checkRun1 := &github.CreateCheckRunOptions{
-		Name:    "Check Run 1",
-		HeadSHA: "",
-		Status:  github.String("in_progress"),
-	}
-	checkRun2 := &github.CreateCheckRunOptions{
-		Name:    "Check Run 2",
-		HeadSHA: "headSHA",
-		Status:  github.String("completed"),
-	}
+	// owner := "abu-usama"
+	// repo := "CI-testing"
+	// headSHA := "1c5f316edd33bf68a0a8008f3efa77e3d6fa3163"
+	// checkSuiteRequest := github.CreateCheckSuiteOptions{
+	// 	HeadSHA: headSHA,
+	// }
+	// checkSuite, _, err := client.Checks.CreateCheckSuite(ctx, owner, repo, checkSuiteRequest)
+	// if err != nil {
+	// 	fmt.Printf("Error creating check suite: %v\n", err)
+	// }
+	// fmt.Printf("Check suite created: %v\n", checkSuite)
+
+	// checkRun1 := &github.CreateCheckRunOptions{
+	// 	Name:    "Check Run 1",
+	// 	HeadSHA: "",
+	// 	Status:  github.String("in_progress"),
+	// }
+	// checkRun2 := &github.CreateCheckRunOptions{
+	// 	Name:    "Check Run 2",
+	// 	HeadSHA: "headSHA",
+	// 	Status:  github.String("completed"),
+	// }
 }
