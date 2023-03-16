@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func Main(init bool) {
@@ -20,4 +21,14 @@ func Main(init bool) {
 }
 
 func MainHandler(w http.ResponseWriter, httpreq *http.Request) {
+	url := httpreq.URL.Path
+	if url != "/" {
+		url = strings.TrimRight(url, "/")
+	}
+
+	if httpreq.Method == "POST" {
+		if url == "/api/v1/github/wh" {
+			handleGithubWh(httpreq, &w)
+		}
+	}
 }
