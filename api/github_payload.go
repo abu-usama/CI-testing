@@ -22,6 +22,6 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	checkRun2 := &github.CreateCheckRunOptions{
 		Name:    "Check Run 2",
 		HeadSHA: "headSHA",
-		Status:  github.String("in_progress"),
+		Status:  github.String("completed"),
 	}
 }
