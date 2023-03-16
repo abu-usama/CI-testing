@@ -44,7 +44,8 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	// switch event := event.(type) {
 	// case *github.PushEvent:
 	// 	c.L.Infof("action: %v", event.GetAction())
-	// 	c.L.Infof("head-commit : %v", event.GetHeadCommit().ID)
+	// 	commitId := event.GetHeadCommit().ID
+	// 	c.L.Infof("head-commit : %v", *commitId)
 	// default:
 	// 	c.L.Infof("unknown event : %V", event)
 	// }
