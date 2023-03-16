@@ -14,12 +14,12 @@ func handleGithubWh(req *http.Request, resp *http.ResponseWriter) {
 	}
 	fmt.Printf("payload :%v", string(payload))
 
-	checkRunRequest1 := &github.CreateCheckRunOptions{
+	checkRun1 := &github.CreateCheckRunOptions{
 		Name:    "Check Run 1",
 		HeadSHA: "",
 		Status:  github.String("in_progress"),
 	}
-	checkRunRequest2 := &github.CreateCheckRunOptions{
+	checkRun2 := &github.CreateCheckRunOptions{
 		Name:    "Check Run 2",
 		HeadSHA: "headSHA",
 		Status:  github.String("in_progress"),
