@@ -94,8 +94,10 @@ jobs:
         name: cli-info
 
     - name: Setup env vars
-      run: source cli-info.env
-
+      run: |
+        source cli-info.env
+        echo "CLI_NAME=$CLI_NAME" >> $GITHUB_ENV
+        echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
 
     - name: Upload assets
       uses: wangyoucao577/go-release-action@v1
@@ -104,7 +106,7 @@ jobs:
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
         goversion: "1.18"
-        project_path: "./$CLI_NAME/cmd/"
-        binary_name: "$CLI_NAME_$CLI_VERSION_${{ matrix.goos }}_${{ matrix.goarch }}"
-        asset_name: "$CLI_NAME_$CLI_VERSION_${{ matrix.goos }}_${{ matrix.goarch }}"
+        project_path: "./${{ env.CLI_NAME }}/"
+        binary_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
+        asset_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
         md5sum: FALSE
