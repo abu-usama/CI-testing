@@ -32,3 +32,5 @@ jobs:
         goversion: "1.19"
         project_path: "./api/cmd/"
         binary_name: "api"
+        asset_name: "${BINARY_NAME}_${RELEASE_TAG}_${GOOS}_${GOARCH}"
+        md5sum: FALSE
