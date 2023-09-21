@@ -1,8 +1,9 @@
 # .github/workflows/release.yaml
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*'
 
 permissions:
     contents: write
@@ -36,10 +37,18 @@ jobs:
             goos: dragonfly
           - goarch: arm64
             goos: solaris
-            
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: wangyoucao577/go-release-action@v1
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        generate_release_notes: TRUE
+
+    - name: Upload assets
+      uses: wangyoucao577/go-release-action@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: ${{ matrix.goos }}
