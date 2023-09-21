@@ -22,6 +22,7 @@ jobs:
 
   releases-matrix:
     name: Release Go Binaries
+    needs: create-release
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -51,6 +52,23 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Extract CLI Name and Version
+      run: |
+        # Get the tag name from the event payload
+        TAG_NAME=${{ github.ref_name }}
+        
+        # Use a regular expression to extract the CLI name and version
+        if [[ $TAG_NAME =~ ^([^-]+)-([^-]+)$ ]]; then
+          CLI_NAME="${BASH_REMATCH[1]}"
+          CLI_VERSION="${BASH_REMATCH[2]}"
+          
+          echo $CLI_NAME >> ${GITHUB_ENV}
+          echo $CLI_VERSION >> ${GITHUB_ENV}
+        else
+          echo "Invalid tag format: $TAG_NAME"
+          exit 1
+        fi
+
     - name: Upload assets
       uses: wangyoucao577/go-release-action@v1
       with:
@@ -58,7 +76,7 @@ jobs:
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
         goversion: "1.18"
-        project_path: "./api/cmd/"
-        binary_name: "api"
-        asset_name: "${{ github.ref_name }}_${{ matrix.goos }}_${{ matrix.goarch }}"
+        project_path: "./${{ env.CLI_NAME }}/cmd/"
+        binary_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
+        asset_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
         md5sum: FALSE
