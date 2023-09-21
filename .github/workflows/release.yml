@@ -19,11 +19,24 @@ jobs:
         goarch: ["386", amd64, arm, arm64]
         exclude:
           - goarch: "386"
-            goos: [darwin, dragonfly, solaris]
+            goos: darwin
+          - goarch: "386"
+            goos: dragonfly
+          - goarch: "386"
+            goos: solaris
           - goarch: arm
-            goos: [darwin, dragonfly, solaris]
+            goos: darwin
+          - goarch: arm
+            goos: dragonfly
+          - goarch: arm
+            goos: solaris
           - goarch: arm64
-            goos: [windows, dragonfly, solaris]
+            goos: windows
+          - goarch: arm64
+            goos: dragonfly
+          - goarch: arm64
+            goos: solaris
+            
     steps:
     - uses: actions/checkout@v3
     - uses: wangyoucao577/go-release-action@v1
