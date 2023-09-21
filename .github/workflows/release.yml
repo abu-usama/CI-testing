@@ -1,6 +1,9 @@
 # .github/workflows/release.yaml
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+      - '*'
 
 permissions:
     contents: write
