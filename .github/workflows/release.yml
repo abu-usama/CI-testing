@@ -47,6 +47,7 @@ jobs:
 
     - name: Generate changelog
       run: |
+        ls -A
         source cli-info.env
         changelog.sh $CLI_NAME $CLI_VERSION > CHANGES.md
 
