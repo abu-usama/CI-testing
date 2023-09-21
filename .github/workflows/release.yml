@@ -15,10 +15,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Extract CLI Name and Version
+      run: |
+        # Get the tag name from the event payload
+        TAG_NAME=${{ github.ref_name }}
+        
+        # Use a regular expression to extract the CLI name and version
+        if [[ $TAG_NAME =~ ^([^-]+)-([^-]+)$ ]]; then
+          CLI_NAME="${BASH_REMATCH[1]}"
+          CLI_VERSION="${BASH_REMATCH[2]}"
+          
+          echo "CLI Name: $CLI_NAME"
+          echo "CLI Version: $CLI_VERSION"
+          
+          # Write CLI_NAME and CLI_VERSION to a file
+          echo "CLI_NAME=$CLI_NAME" > cli-info.env
+          echo "CLI_VERSION=$CLI_VERSION" >> cli-info.env
+        else
+          echo "Invalid tag format: $TAG_NAME"
+          exit 1
+        fi
+        
+    - name: Upload CLI Info
+      uses: actions/upload-artifact@v2
+      with:
+        name: cli-info
+        path: cli-info.env
+
+    - name: Generate changelog
+      run: |
+        source cli-info.env
+        changelog.sh $CLI_NAME $CLI_VERSION > CHANGES.md
+
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        generate_release_notes: TRUE
+        body_path: CHANGES.md
 
   releases-matrix:
     name: Release Go Binaries
