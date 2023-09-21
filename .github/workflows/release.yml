@@ -66,6 +66,7 @@ jobs:
           echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
         else
           echo "Invalid tag format: $TAG_NAME"
+          echo "Tag should be of format CLI-VSN. e.g. ipinfo-1.0.0"
           exit 1
         fi
 
