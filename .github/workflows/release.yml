@@ -62,8 +62,8 @@ jobs:
           CLI_NAME="${BASH_REMATCH[1]}"
           CLI_VERSION="${BASH_REMATCH[2]}"
           
-          echo $CLI_NAME >> ${GITHUB_ENV}
-          echo $CLI_VERSION >> ${GITHUB_ENV}
+          echo "CLI_NAME=$CLI_NAME" >> $GITHUB_ENV
+          echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
         else
           echo "Invalid tag format: $TAG_NAME"
           exit 1
