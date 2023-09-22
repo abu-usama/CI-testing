@@ -106,7 +106,7 @@ jobs:
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
         goversion: "1.18"
-        project_path: "./${{ env.CLI_NAME }}/"
+        project_path: "./${{ env.CLI_NAME }}/cmd"
         binary_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
         asset_name: "${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}"
         md5sum: FALSE
