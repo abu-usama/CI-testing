@@ -74,7 +74,7 @@ jobs:
           echo "GOARCH=$GOARCH" >> $GITHUB_ENV
       - name: Build
         run: |
-        GOOS=${{env.GOOS}} GOARCH=${{env.GOARCH}} go build -o ${{env.BINARY_NAME}} "./${{ env.CLI_NAME }}/"
+          GOOS=${{ env.GOOS }} GOARCH=${{ env.GOARCH }} go build -o ${{ env.BINARY_NAME }} "./${{ env.CLI_NAME }}/"
       - name: Release Notes
         run:
           git log $(git describe HEAD~ --tags --abbrev=0)..HEAD --pretty='format:* %h %s%n  * %an <%ae>' --no-merges >> ".github/RELEASE-TEMPLATE.md"
@@ -83,6 +83,6 @@ jobs:
         with:
           body_path: ".github/RELEASE-TEMPLATE.md"
           draft: true
-          files: ${{env.BINARY_NAME}}
+          files: ${{ env.BINARY_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
