@@ -6,6 +6,10 @@ on:
 
 name: Latest Release
 
+permissions:
+    contents: write
+    packages: write
+
 jobs:
   release:
     name: Create Release
