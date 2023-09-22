@@ -10,13 +10,17 @@ permissions:
     packages: write
 
 jobs:
-  create-release:
-    name: Create a new release from a tag
+  test-build:
+    name: Build test
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: Setup GO
+      uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'
 
     - name: Extract CLI Name and Version
       run: |
@@ -30,6 +34,10 @@ jobs:
           
           echo "CLI Name: $CLI_NAME"
           echo "CLI Version: $CLI_VERSION"
+
+          # Add to github env
+          echo "CLI_NAME=$CLI_NAME" >> $GITHUB_ENV
+          echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
           
           # Write CLI_NAME and CLI_VERSION to a file
           echo "CLI_NAME=$CLI_NAME" > cli-info.env
@@ -38,7 +46,10 @@ jobs:
           echo "Invalid tag format: $TAG_NAME"
           exit 1
         fi
-        
+    
+    - name: Build
+      run: go build ./${{ env.CLI_NAME }}/cmd/
+
     - name: Upload CLI Info
       uses: actions/upload-artifact@v3
       with:
@@ -46,12 +57,32 @@ jobs:
         path: cli-info.env
         retention-days: 1
 
+  create-release:
+    name: Create a new release from a tag
+    needs: test-build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Download CLI Info
+      uses: actions/download-artifact@v3
+      with:
+        name: cli-info
+
+    - name: Setup env vars
+      run: |
+        source cli-info.env
+        echo "CLI_NAME=$CLI_NAME" >> $GITHUB_ENV
+        echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
+
     - name: Generate changelog
       run: |
         source cli-info.env
         ./changelog.sh $CLI_NAME $CLI_VERSION > CHANGES.md
 
-    - name: Create release
+    - name: Create release with changelog
       uses: softprops/action-gh-release@v1
       with:
         body_path: CHANGES.md
