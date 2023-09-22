@@ -86,6 +86,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         body_path: CHANGES.md
+        files: |
+          LICENSE
+          newfile.txt
 
   releases-matrix:
     name: Release Go Binaries
