@@ -27,7 +27,7 @@ fi
 
 # build
 rm -f $ROOT/build/${CLI}_${VSN}*
-./build-all-platforms.sh ${CLI} "$VSN"
+$ROOT/scripts/build-all-platforms.sh ${CLI} "$VSN"
 
 # archive
 cd $ROOT/build
