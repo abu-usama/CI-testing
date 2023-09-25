@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   release:
-    name: Build for all platforms
+    name: Release to github
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -57,6 +57,6 @@ jobs:
       with:
         body_path: CHANGES.md
         files: |
-          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.tar.gz                                         \
-          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.zip                                            \
+          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.tar.gz
+          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.zip
           ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.deb
