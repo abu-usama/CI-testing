@@ -58,7 +58,7 @@ jobs:
         retention-days: 1
 
   create-release:
-    name: Create a new release from a tag
+    name: Create github release
     needs: test-build
     runs-on: ubuntu-latest
     steps:
@@ -91,7 +91,7 @@ jobs:
           newfile.txt
 
   releases-matrix:
-    name: Release Go Binaries
+    name: Release
     needs: create-release
     runs-on: ubuntu-latest
     strategy:

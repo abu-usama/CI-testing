@@ -1,0 +1,50 @@
+on:
+  push:
+    tags:
+      - '*'
+
+name: Build for all platforms
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    name: Build for all platforms
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup GO
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.18'
+
+    - name: Extract CLI Name and Version
+      run: |
+        # Get the tag name from the event payload
+        TAG_NAME=${{ github.ref_name }}
+
+        # Use a regular expression to extract the CLI name and version
+        if [[ $TAG_NAME =~ ^([^-]+)-([^-]+)$ ]]; then
+          CLI_NAME="${BASH_REMATCH[1]}"
+          CLI_VERSION="${BASH_REMATCH[2]}"
+
+          echo "CLI Name: $CLI_NAME"
+          echo "CLI Version: $CLI_VERSION"
+
+          # Add to github env
+          echo "CLI_NAME=$CLI_NAME" >> $GITHUB_ENV
+          echo "CLI_VERSION=$CLI_VERSION" >> $GITHUB_ENV
+        else
+          echo "Invalid tag format: $TAG_NAME"
+          exit 1
+        fi
+    
+    - name: Build
+      run: ./scripts/build.sh ${{ env.CLI_NAME }} ${{ env.CLI_VERSION }}
+
+    - name: Show artifacts
+      run: tree ./build
