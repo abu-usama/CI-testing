@@ -1,0 +1,11 @@
+Source: ipinfo
+Section: utils
+Version: 0.2.9
+Priority: optional
+Maintainer: IPinfo <support@ipinfo.io>
+Vcs-Git: https://github.com/ipinfo/cli
+Vcs-browser: https://github.com/ipinfo/cli
+Homepage: https://ipinfo.io
+Package: api
+Architecture: amd64
+Description: This is a dummy package.
