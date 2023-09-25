@@ -3,14 +3,14 @@ on:
     tags:
       - '*'
 
-name: Build for all platforms
+name: Release
 
 permissions:
   contents: write
   packages: write
 
 jobs:
-  build:
+  release:
     name: Build for all platforms
     runs-on: ubuntu-latest
     steps:
@@ -42,9 +42,21 @@ jobs:
           echo "Invalid tag format: $TAG_NAME"
           exit 1
         fi
-    
+
     - name: Build
       run: ./scripts/build.sh ${{ env.CLI_NAME }} ${{ env.CLI_VERSION }}
 
     - name: Show artifacts
       run: tree ./build
+
+    - name: Generate changelog
+      run: ./changelog.sh ${{ env.CLI_NAME }} ${{ env.CLI_VERSION }} > CHANGES.md
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body_path: CHANGES.md
+        files: |
+          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.tar.gz                                         \
+          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.zip                                            \
+          ./build/${{ env.CLI_NAME }}_${{ env.CLI_VERSION }}*.deb
