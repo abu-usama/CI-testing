@@ -4,7 +4,6 @@ MARKER_PREFIX="##"
 CLI=$1
 VERSION=$2
 
-IFS=''
 found=0
 
 cat ./$CLI/CHANGELOG.md | while read "line"; do
