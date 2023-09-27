@@ -37,6 +37,11 @@ jobs:
           exit 1
         fi
 
+    - name: Check env var
+      run: |
+        touch ${{ env.CLI_NAME }}.file
+        ls
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
