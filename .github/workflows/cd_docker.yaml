@@ -10,9 +10,6 @@ jobs:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      name: Release to Github
-    runs-on: ubuntu-latest
-    steps:
     - name: Checkout
       uses: actions/checkout@v3
 
