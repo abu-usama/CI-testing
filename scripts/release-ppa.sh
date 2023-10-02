@@ -27,4 +27,4 @@ cd $ROOT/..
 debsign -k $KEY ipinfo_${VSN}.dsc ipinfo_${VSN}_source.changes
 
 # uploading the package to ppa
-dput ppa:ipinfo/ppa ipinfo_${VSN}_source.changes
+dput ppa:usama5846/dev ipinfo_${VSN}_source.changes
