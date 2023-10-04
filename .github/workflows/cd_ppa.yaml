@@ -43,9 +43,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Install packages
-        run: |
-          sudo apt install devscripts debhelper dput
-          cpan -l
+        run: sudo apt install devscripts debhelper dh-golang dput
 
       - name: Build source package
         run: debuild -us -uc -S -d
