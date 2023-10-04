@@ -49,7 +49,11 @@ jobs:
         run: debuild -us -uc -S -d
 
       - name: Sign the source package
-        run: debsign -k 21B2154F8C232BF6BC24C3C4A734F9DB6B08C31A ipinfo_${{ env.CLI_VERSION }}.dsc ipinfo_${{ env.CLI_VERSION }}_source.changes
+        run: |
+          cd ./..
+          debsign -k 21B2154F8C232BF6BC24C3C4A734F9DB6B08C31A ipinfo_${{ env.CLI_VERSION }}.dsc ipinfo_${{ env.CLI_VERSION }}_source.changes
 
       - name: Push to Launchpad
-        run: dput ppa:usama5846/dev ../ipinfo_${{ env.CLI_VERSION }}_source.changes
+        run: |
+          cd ./..
+          dput ppa:usama5846/dev ../ipinfo_${{ env.CLI_VERSION }}_source.changes
