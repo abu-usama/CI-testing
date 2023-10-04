@@ -43,10 +43,10 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Install packages
-        run: sudo apt install devscripts debhelper-compat dput
+        run: apt install devscripts debhelper dput
 
       - name: Build source package
         run: debuild -us -uc -S -d
 
-      - name: Push to Launchpad
-        run: dput ppa:usama5846/dev ../ipinfo_${{ env.CLI_VERSION }}_source.changes
+      # - name: Push to Launchpad
+      #   run: dput ppa:usama5846/dev ../ipinfo_${{ env.CLI_VERSION }}_source.changes
