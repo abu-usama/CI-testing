@@ -43,7 +43,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Install packages
-        run: apt install devscripts debhelper dput
+        run: sudo apt install devscripts debhelper dput
 
       - name: Build source package
         run: debuild -us -uc -S -d
