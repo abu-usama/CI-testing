@@ -56,4 +56,4 @@ jobs:
       - name: Push to Launchpad
         run: |
           cd ./..
-          dput ppa:usama5846/dev ../ipinfo_${{ env.CLI_VERSION }}_source.changes
+          dput ppa:usama5846/dev ipinfo_${{ env.CLI_VERSION }}_source.changes
